@@ -347,27 +347,81 @@ const Home: React.FC = () => {
         </div>
       </section> */}
 
-      {/* Popular Categories */}
+      {/* What Our Players Say */}
       <section className="py-16 bg-gray-800/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">Popular Categories</h2>
-            <p className="text-gray-400 text-lg">Explore games by your favorite genres</p>
+            <h2 className="text-3xl font-bold text-white mb-4">What Our Players Say</h2>
+            <p className="text-gray-400 text-lg">Join thousands of satisfied gamers worldwide</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {['Action', 'Puzzle', 'Racing', 'Arcade', 'Strategy', 'Sports'].map((category, index) => (
-              <div
-                key={category}
-                className="bg-gray-800 hover:bg-gray-700 rounded-lg p-6 text-center transition-colors duration-200 cursor-pointer group"
-              >
-                <div className="text-2xl mb-3">🎮</div>
-                <h3 className="text-white font-semibold group-hover:text-green-400 transition-colors">
-                  {category}
-                </h3>
-                <p className="text-gray-400 text-sm mt-1">
-                  {Math.floor(Math.random() * 100) + 50}+ games
-                </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Alex M.",
+                location: "New York, USA",
+                rating: 5,
+                review: "Amazing collection of games! I've been playing here for months and there's always something new to discover. The games load fast and work perfectly.",
+                game: "Snake Dash"
+              },
+              {
+                name: "Sarah K.",
+                location: "London, UK", 
+                rating: 5,
+                review: "Love that I don't need to download anything. Perfect for quick gaming sessions during breaks. The puzzle games are my favorite!",
+                game: "Block Puzzle"
+              },
+              {
+                name: "Mike R.",
+                location: "Toronto, Canada",
+                rating: 5,
+                review: "Great variety of games and they all run smoothly in my browser. The action games are incredibly fun and addictive!",
+                game: "War Ship"
+              },
+              {
+                name: "Emma L.",
+                location: "Sydney, Australia",
+                rating: 5,
+                review: "My kids and I love playing these games together. Safe, fun, and completely free. Highly recommend to other families!",
+                game: "Ludo"
+              },
+              {
+                name: "David P.",
+                location: "Berlin, Germany",
+                rating: 5,
+                review: "Impressive HTML5 games that work on any device. I play on my phone, tablet, and computer - always a smooth experience.",
+                game: "Racing Thunder"
+              },
+              {
+                name: "Lisa T.",
+                location: "Tokyo, Japan",
+                rating: 5,
+                review: "The best free gaming site I've found. No annoying downloads or registrations. Just pure gaming fun whenever I want!",
+                game: "Bubble Shooter"
+              }
+            ].map((review, index) => (
+              <div key={index} className="bg-gray-800 rounded-lg p-6 hover:bg-gray-750 transition-colors">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    {review.name.charAt(0)}
+                  </div>
+                  <div className="ml-4">
+                    <h4 className="text-white font-semibold">{review.name}</h4>
+                    <p className="text-gray-400 text-sm">{review.location}</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center mb-3">
+                  {Array.from({ length: review.rating }, (_, i) => (
+                    <span key={i} className="text-yellow-400 text-lg">★</span>
+                  ))}
+                </div>
+                
+                <p className="text-gray-300 mb-4 leading-relaxed">"{review.review}"</p>
+                
+                <div className="text-green-400 text-sm font-medium">
+                  Favorite Game: {review.game}
+                </div>
               </div>
             ))}
           </div>
