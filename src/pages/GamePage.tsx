@@ -7,6 +7,7 @@ const GamePage: React.FC = () => {
   const navigate = useNavigate();
   const [userRating, setUserRating] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
+  const [iframeError, setIframeError] = useState(false);
 
   // Game data from Home.tsx
   const allGames = [
@@ -353,15 +354,41 @@ const GamePage: React.FC = () => {
         {/* Game Area - Left Side */}
         <div className="lg:w-2/3 p-4">
           <div className="bg-black rounded-lg overflow-hidden h-full min-h-[600px]">
-            {/* Game Iframe - Actual HTML5 Game */}
-            <iframe
-              src={game.link}
-              title={game.title}
-              className="w-full h-full min-h-[600px] border-0"
-              allowFullScreen
-              allow="gamepad; microphone; camera"
-              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock"
-            />
+            {!iframeError ? (
+              <iframe
+                src={game.link}
+                title={game.title}
+                className="w-full h-full min-h-[600px] border-0"
+                allowFullScreen
+                allow="gamepad; microphone; camera"
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-top-navigation allow-top-navigation-by-user-activation"
+                referrerPolicy="no-referrer-when-downgrade"
+                loading="lazy"
+                onError={() => setIframeError(true)}
+              />
+            ) : (
+              <div className="w-full h-full min-h-[600px] flex flex-col items-center justify-center text-white">
+                <div className="text-center p-8">
+                  <img
+                    src={game.thumbnail}
+                    alt={game.title}
+                    className="w-32 h-32 object-cover rounded-lg mx-auto mb-6"
+                  />
+                  <h2 className="text-2xl font-bold mb-4">{game.title}</h2>
+                  <p className="text-gray-300 mb-6 max-w-md">{game.description}</p>
+                  <p className="text-gray-400 mb-6 text-sm">
+                    This game cannot be embedded due to security restrictions.
+                  </p>
+                  <button
+                    onClick={() => window.open(game.link, '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes')}
+                    className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors flex items-center space-x-2 mx-auto"
+                  >
+                    <Gamepad2 className="h-5 w-5" />
+                    <span>Play Game in New Window</span>
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
