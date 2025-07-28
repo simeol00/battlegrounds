@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://battlegrounds.com/sitemap.xml
+
+# Disallow admin or sensitive areas (none currently)
+# Disallow: /admin/
+
+# Allow all game content
+Allow: /game/
+Allow: /categories/
+
+# Crawl delay (optional - removes load on server)
+Crawl-delay: 1
